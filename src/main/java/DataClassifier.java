@@ -193,7 +193,7 @@ public class DataClassifier {
         try (Scanner scanner = new Scanner(line).useLocale(Locale.US)) {
             while (scanner.hasNext()) {
                 try {
-                    if (scanner.hasNextInt()) {
+                    if (scanner.hasNextBigInteger()) {
                         String num = scanner.next();
                         if (!ints.isEmpty()) {
                             ints.append(' ');

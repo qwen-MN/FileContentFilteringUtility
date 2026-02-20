@@ -1,5 +1,5 @@
 public class DataClassifierApp {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         if(args.length == 0) {
             ArgsParser.printUsage();
             System.exit(1);

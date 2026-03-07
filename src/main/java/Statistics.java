@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public interface Statistics {
     void addValue(String value);
     String getReport();
@@ -46,8 +49,9 @@ class IntStatistics implements Statistics {
         sb.append("Integers: ").append(count);
 
         if (fullMode && count > 0) {
-            double avg = (double) sum / count;
-            sb.append(String.format(" | Min: %s | Max: %s | Sum: %s | Avg: %.2f",
+            BigDecimal avg = new BigDecimal(sum)
+                    .divide(new BigDecimal(count), 2, RoundingMode.HALF_UP);
+            sb.append(String.format(" | Min: %s | Max: %s | Sum: %s | Avg: %s",
                     min, max, sum, avg));
         }
 

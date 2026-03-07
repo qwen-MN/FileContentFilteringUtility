@@ -193,7 +193,7 @@ public class DataClassifier {
         try (Scanner scanner = new Scanner(line).useLocale(Locale.US)) {
             while (scanner.hasNext()) {
                 try {
-                    if (scanner.hasNextBigInteger()) {
+                    if (scanner.hasNextInt()) {
                         String num = scanner.next();
                         if (!ints.isEmpty()) {
                             ints.append(' ');
@@ -203,7 +203,7 @@ public class DataClassifier {
                     } else if (scanner.hasNextDouble()) {
                         String num = scanner.next();
                         if (!floats.isEmpty()) {
-                            ints.append(' ');
+                            floats.append(' ');
                         }
                         floats.append(num);
                         floatStats.addValue(num);

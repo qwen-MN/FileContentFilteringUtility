@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 
 public interface Statistics {
@@ -9,9 +10,9 @@ public interface Statistics {
 
 class IntStatistics implements Statistics {
     private int count = 0;
-    private long sum = 0;
-    private Integer min = null;
-    private Integer max = null;
+    private BigInteger sum = BigInteger.ZERO;
+    private BigInteger min = null;
+    private BigInteger max = null;
     private final boolean fullMode;
 
     public IntStatistics(boolean fullMode) {
@@ -21,15 +22,15 @@ class IntStatistics implements Statistics {
     @Override
     public void addValue(String value) {
         try {
-            int num = Integer.parseInt(value);
+            BigInteger num = new BigInteger(value);
             count++;
-            sum += num;
+            sum = sum.add(num);
 
             if (fullMode) {
-                if (min == null || num < min) {
+                if (min == null || num.compareTo(min) < 0) {
                     min = num;
                 }
-                if (max == null || num > max) {
+                if (max == null || num.compareTo(max) > 0) {
                     max = num;
                 }
             }
@@ -47,12 +48,13 @@ class IntStatistics implements Statistics {
     public String getReport() {
         StringBuilder sb = new StringBuilder();
         sb.append("Integers: ").append(count);
-
         if (fullMode && count > 0) {
             BigDecimal avg = new BigDecimal(sum)
                     .divide(new BigDecimal(count), 2, RoundingMode.HALF_UP);
+            String avgStr = avg.stripTrailingZeros().toPlainString();
+
             sb.append(String.format(" | Min: %s | Max: %s | Sum: %s | Avg: %s",
-                    min, max, sum, avg));
+                    min, max, sum, avgStr));
         }
 
         return sb.toString();

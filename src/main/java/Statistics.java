@@ -47,7 +47,7 @@ class IntStatistics implements Statistics {
 
         if (fullMode && count > 0) {
             double avg = (double) sum / count;
-            sb.append(String.format(" | Min: %d | Max: %d | Sum: %d | Avg: %.2f",
+            sb.append(String.format(" | Min: %s | Max: %s | Sum: %s | Avg: %.2f",
                     min, max, sum, avg));
         }
 
